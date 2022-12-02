@@ -61,6 +61,7 @@ export default {
   align-items: center;
   margin-top: 10%;
   h3 {
+    text-align: center;
     margin-bottom: 30px;
     color: rgb(43, 66, 157);
   }
