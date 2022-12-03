@@ -3,11 +3,16 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
+import { deskData } from "../components/data/desks";
+import { roomData } from "../components/data/rooms";
+
 export default () =>
   new Vuex.Store({
     modules: {},
     state() {
       return {
+        rooms: [],
+        desks: [],
         isLogged: false,
         user: {},
         users: [],
@@ -20,8 +25,32 @@ export default () =>
       users(state) {
         return state.users;
       },
+      roomData(state) {
+        return state.rooms;
+      },
+      deskData(state) {
+        return state.desks;
+      },
     },
     mutations: {
+      manageRoomsData(state, payload) {
+        if (state.rooms.length === 0 && !localStorage.getItem("rooms")) {
+          localStorage.setItem("rooms", JSON.stringify(roomData));
+          state.rooms = roomData;
+        } else if (state.rooms.length === 0 && localStorage.getItem("rooms")) {
+          state.rooms = JSON.parse(localStorage.getItem("rooms"));
+        }
+      },
+
+      manageDesksData(state, payload) {
+        if (state.desks.length === 0 && !localStorage.getItem("desks")) {
+          localStorage.setItem("desks", JSON.stringify(deskData));
+          state.desks = deskData;
+        } else if (state.desks.length === 0 && localStorage.getItem("desks")) {
+          state.desks = JSON.parse(localStorage.getItem("desks"));
+        }
+      },
+
       getUserInfo(state, payload) {
         if (payload) {
           state.isLogged = payload.isLogged;
@@ -59,6 +88,10 @@ export default () =>
       initialiseStoreWithUserAction(context, payload) {
         context.commit("initialiseStoreWithUser");
         context.commit("initialiseStoreWithUsers");
+      },
+      initialiseStoreWithRoomandDeskAction(context, payload) {
+        context.commit("manageRoomsData");
+        context.commit("manageDesksData");
       },
     },
   });
