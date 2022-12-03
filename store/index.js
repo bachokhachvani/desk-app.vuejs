@@ -10,11 +10,15 @@ export default () =>
       return {
         isLogged: false,
         user: {},
+        users: [],
       };
     },
     getters: {
       user(state) {
         return { user: state.user, isLogged: state.isLogged };
+      },
+      users(state) {
+        return state.users;
       },
     },
     mutations: {
@@ -32,6 +36,13 @@ export default () =>
           ).isLogged;
         }
       },
+      initialiseStoreWithUsers(state, payload) {
+        if (localStorage.getItem("users")) {
+          state.users = JSON.parse(localStorage.getItem("users"));
+        } else {
+          state.users = [];
+        }
+      },
     },
     actions: {
       getUser(context, payload) {
@@ -47,6 +58,7 @@ export default () =>
       },
       initialiseStoreWithUserAction(context, payload) {
         context.commit("initialiseStoreWithUser");
+        context.commit("initialiseStoreWithUsers");
       },
     },
   });
