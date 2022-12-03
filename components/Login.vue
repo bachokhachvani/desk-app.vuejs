@@ -21,7 +21,6 @@
           />
         </div>
         <button>Login</button>
-        <div>{{ userData2.isLogged }} asd</div>
       </form>
     </div>
   </div>
@@ -39,7 +38,7 @@ export default {
     };
   },
   computed: {
-    userData2() {
+    userInfo() {
       return this.$store.getters.user;
     },
   },

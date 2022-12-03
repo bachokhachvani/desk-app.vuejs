@@ -24,6 +24,14 @@ export default () =>
           state.user = payload.user;
         }
       },
+      initialiseStoreWithUser(state, payload) {
+        if (localStorage.getItem("userInfo")) {
+          state.user = JSON.parse(localStorage.getItem("userInfo")).user;
+          state.isLogged = JSON.parse(
+            localStorage.getItem("userInfo")
+          ).isLogged;
+        }
+      },
     },
     actions: {
       getUser(context, payload) {
@@ -36,6 +44,9 @@ export default () =>
             localStorage.setItem("userInfo", JSON.stringify(payload));
           }
         }
+      },
+      initialiseStoreWithUserAction(context, payload) {
+        context.commit("initialiseStoreWithUser");
       },
     },
   });
