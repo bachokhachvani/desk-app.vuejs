@@ -1,26 +1,30 @@
 <template>
   <div class="main">
-    <div class="header">
-      <h3>Rooms</h3>
+    <div>
+      <h3>room {{ this.id }} desks</h3>
     </div>
-    <div v-for="room in roomData" :key="room.id">
-      <nuxt-link :to="'/rooms/' + room.roomNumber + '/desks'">
-        <div class="roomContainer">
+    <div v-for="desk in deskData" :key="desk.id">
+      <nuxt-link :to="'/rooms/' + desk.roomNumber + '/desks/' + desk.id">
+        <div class="deskContainer">
           <div class="contentWrapper">
             <p>Room N:</p>
-            <p>{{ room.roomNumber }}</p>
+            <p>{{ desk.roomNumber }}</p>
           </div>
           <div class="contentWrapper">
             <p>Size:</p>
-            <p>{{ room.size }}</p>
+            <p>{{ desk.size }}</p>
           </div>
           <div class="contentWrapper">
-            <p>Capacity:</p>
-            <p>{{ room.roomCapacity }}</p>
+            <p>Price:</p>
+            <p>{{ desk.prize }}</p>
           </div>
           <div class="contentWrapper">
-            <p>Manager:</p>
-            <p>{{ room.manager }}</p>
+            <p>Position:</p>
+            <p>{{ desk.position }}</p>
+          </div>
+          <div class="contentWrapper">
+            <p>isTaken:</p>
+            <p>{{ desk.isTaken }}</p>
           </div>
         </div>
       </nuxt-link>
@@ -30,20 +34,22 @@
 
 <script>
 export default {
-  name: "Room",
   data() {
-    return {};
+    return {
+      id: this.$route.params.id,
+    };
   },
   computed: {
-    roomData() {
-      return this.$store.getters.roomData;
+    deskData() {
+      return this.$store.getters.deskData.filter(
+        (desk) => desk.roomNumber == this.id
+      );
     },
   },
-  methods: {},
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .main {
   display: flex;
   flex-direction: column;
@@ -53,7 +59,7 @@ export default {
   text-align: center;
   font-size: 25px;
 }
-.roomContainer {
+.deskContainer {
   display: flex;
   justify-content: flex-start;
   gap: 20px;

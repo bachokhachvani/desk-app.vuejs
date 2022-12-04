@@ -28,7 +28,7 @@
 <script>
 import User from "./models/user";
 import { userData } from "./data/users";
-console.log("sda", userData);
+
 export default {
   name: "Register",
   data() {

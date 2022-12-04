@@ -19,6 +19,13 @@ export default () =>
       };
     },
     getters: {
+      mode(state) {
+        if (state.isLogged) {
+          return state.user.role;
+        } else {
+          return "guest";
+        }
+      },
       user(state) {
         return { user: state.user, isLogged: state.isLogged };
       },
@@ -33,6 +40,13 @@ export default () =>
       },
     },
     mutations: {
+      // setMode(state, payload) {
+      //   if (state.isLogged) {
+      //     state.mode === state.user.role;
+      //   } else {
+      //     state.mode === "guest";
+      //   }
+      // },
       manageRoomsData(state, payload) {
         if (state.rooms.length === 0 && !localStorage.getItem("rooms")) {
           localStorage.setItem("rooms", JSON.stringify(roomData));

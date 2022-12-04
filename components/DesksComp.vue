@@ -3,7 +3,7 @@
     <div class="header">
       <h3>Desks</h3>
     </div>
-    <div v-for="desk in deskData" key="desk.id">
+    <div v-for="desk in deskData" :key="desk.id">
       <div class="deskContainer">
         <div class="contentWrapper">
           <p>Room N:</p>

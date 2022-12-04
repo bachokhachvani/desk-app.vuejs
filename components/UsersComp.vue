@@ -25,15 +25,11 @@
 <script>
 export default {
   name: "User",
-  data() {
-    return {};
-  },
   computed: {
     usersData() {
       return this.$store.getters.users;
     },
   },
-  methods: {},
 };
 </script>
 

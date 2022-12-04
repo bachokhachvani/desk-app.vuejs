@@ -4,5 +4,6 @@ export default class User {
     this.email = email;
     this.password = password;
     this.role = role ? role : "Client";
+    this.ownedDesks = [];
   }
 }

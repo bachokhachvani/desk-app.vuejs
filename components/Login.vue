@@ -49,9 +49,8 @@ export default {
   },
   methods: {
     submitHandler() {
-      console.log(this.email, this.password);
       const users = JSON.parse(localStorage.getItem("users")) || userData;
-      console.log("aeeee", users[0].email);
+      // console.log("aeeee", users[0].email);
       const isUser =
         users.filter((data) => data.email === this.email).length > 0
           ? users.filter((data) => data.email === this.email)[0]
