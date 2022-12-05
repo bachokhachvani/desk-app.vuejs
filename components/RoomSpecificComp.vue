@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <div>
+    <div class="header">
       <h3>room {{ this.id }} desks</h3>
     </div>
     <div v-for="desk in deskData" :key="desk.id">
@@ -50,10 +50,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+p {
+  margin: 15px 0;
+}
 .main {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
 }
 .header {
   text-align: center;
@@ -63,6 +66,10 @@ export default {
   display: flex;
   justify-content: flex-start;
   gap: 20px;
+  align-items: center;
+  &:hover {
+    background-color: rgb(210, 203, 203);
+  }
 }
 .contentWrapper {
   display: flex;

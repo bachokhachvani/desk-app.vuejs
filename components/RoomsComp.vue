@@ -49,6 +49,9 @@ export default {
   flex-direction: column;
   gap: 20px;
 }
+p {
+  margin: 15px 0;
+}
 .header {
   text-align: center;
   font-size: 25px;
@@ -56,7 +59,10 @@ export default {
 .roomContainer {
   display: flex;
   justify-content: flex-start;
-  gap: 20px;
+  gap: 10px;
+  &:hover {
+    background-color: rgb(210, 203, 203);
+  }
 }
 .contentWrapper {
   display: flex;

@@ -40,13 +40,12 @@ export default () =>
       },
     },
     mutations: {
-      // setMode(state, payload) {
-      //   if (state.isLogged) {
-      //     state.mode === state.user.role;
-      //   } else {
-      //     state.mode === "guest";
-      //   }
-      // },
+      logout(state, payload) {
+        state.isLogged = false;
+        state.user = {};
+        localStorage.removeItem("userInfo");
+        console.log("commited");
+      },
       manageRoomsData(state, payload) {
         if (state.rooms.length === 0 && !localStorage.getItem("rooms")) {
           localStorage.setItem("rooms", JSON.stringify(roomData));
@@ -106,6 +105,9 @@ export default () =>
       initialiseStoreWithRoomandDeskAction(context, payload) {
         context.commit("manageRoomsData");
         context.commit("manageDesksData");
+      },
+      logoutAction(context, payload) {
+        context.commit("logout");
       },
     },
   });

@@ -3,7 +3,7 @@
     <div class="header">
       <h3>Users</h3>
     </div>
-    <div v-for="user in usersData" key="user.email">
+    <div v-for="user in usersData" :key="user.email">
       <div class="userContainer">
         <div class="contentWrapper">
           <p>Name:</p>
