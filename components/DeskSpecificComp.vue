@@ -50,6 +50,7 @@ export default {
   text-align: center;
   font-size: 40px;
   color: rgb(11, 11, 103);
+  padding-bottom: 30px;
 }
 .content {
   display: flex;

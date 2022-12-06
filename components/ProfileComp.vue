@@ -40,6 +40,8 @@ export default {
   text-align: center;
   font-size: 40px;
   color: rgb(11, 11, 103);
+  margin-top: 30px;
+  padding-bottom: 30px;
 }
 .content {
   display: flex;
