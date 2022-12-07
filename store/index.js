@@ -41,30 +41,54 @@ export default () =>
       },
     },
     mutations: {
-      getUpdatedUsersAfterRegister(state, payload) {
-        state.users = payload.users;
-        console.log("yleee diidiii", payload.users);
-        console.log("yleee patara", state.users);
-      },
-      rentDesk(state, payload) {
+      cancelRent(state, payload) {
         const desk = state.desks.filter((desk) => desk.id == payload.id);
-        desk[0].isTaken = true;
+        desk[0].isTaken = false;
+
         state.desks.map((obj) => desk.find((o) => o.id === obj.id) || obj);
-
-        state.user.ownedDesks.push(desk[0]);
-
-        console.log("users", state.users);
         console.log("desks", state.desks);
+
+        state.user.ownedDesks.splice(payload.index, 1);
+        console.log("users", state.user.ownedDesks);
 
         const user = state.user;
         const index = state.users
           .map((object) => object.email)
           .indexOf(user.email);
 
-        state.users[index].ownedDesks.push(desk[0]);
+        state.users[index].ownedDesks.splice(payload.index, 1);
 
+        console.log("userYleeo", state.users);
+
+        localStorage.setItem("users", JSON.stringify(state.users));
+        localStorage.setItem("desks", JSON.stringify(state.desks));
+        localStorage.setItem(
+          "userInfo",
+          JSON.stringify({ isLogged: state.isLogged, user: state.user })
+        );
+      },
+      getUpdatedUsersAfterRegister(state, payload) {
+        state.users = payload.users;
+      },
+      rentDesk(state, payload) {
+        const desk = state.desks.filter((desk) => desk.id == payload.id);
+        desk[0].isTaken = true;
+        state.desks.map((obj) => desk.find((o) => o.id === obj.id) || obj);
+        state.user.ownedDesks.push(desk[0]);
+        console.log("users", state.users);
+        console.log("desks", state.desks);
+        const user = state.user;
+        const index = state.users
+          .map((object) => object.email)
+          .indexOf(user.email);
+        state.users[index].ownedDesks.push(desk[0]);
         localStorage.setItem("desks", JSON.stringify(state.desks));
         localStorage.setItem("users", JSON.stringify(state.users));
+        console.log("stateuser", state.user);
+        localStorage.setItem(
+          "userInfo",
+          JSON.stringify({ isLogged: state.isLogged, user: state.user })
+        );
       },
       logout(state, payload) {
         state.isLogged = false;
@@ -142,6 +166,9 @@ export default () =>
       },
       getUpdatedUsersAfterRegister(context, payload) {
         context.commit("getUpdatedUsersAfterRegister", payload);
+      },
+      cancelRentAction(context, payload) {
+        context.commit("cancelRent", payload);
       },
     },
   });
