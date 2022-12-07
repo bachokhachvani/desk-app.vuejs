@@ -24,9 +24,20 @@
         <p>Room:</p>
         <p>{{ deskData.roomNumber }}</p>
       </div>
+      <div v-if="!deskData.isTaken && mode === 'Client'" class="weekContainer">
+        <div class="weekNumber">
+          <p>number of weeks: {{ weeksData }}</p>
+        </div>
+        <div class="btnContainer">
+          <button @click="increase">+</button>
+          <button @click="decrease" :disabled="weeksData === 0">-</button>
+        </div>
+      </div>
       <div class="buttonWrapper">
         <button
           v-if="deskData.isTaken === false && mode === 'Client'"
+          :disabled="weeksData === 0"
+          type="button"
           class="rentBtn"
           @click="rentHandler"
         >
@@ -43,14 +54,27 @@ export default {
   data() {
     return {
       deskId: this.$route.params.deskId,
+      weeks: 0,
     };
   },
   methods: {
+    increase() {
+      this.weeks++;
+    },
+    decrease() {
+      this.weeks--;
+    },
     rentHandler() {
-      this.$store.dispatch("rentDeskAction", { id: this.deskId });
+      this.$store.dispatch("rentDeskAction", {
+        id: this.deskId,
+        rentWeeks: this.weeks,
+      });
     },
   },
   computed: {
+    weeksData() {
+      return this.weeks;
+    },
     deskData() {
       return this.$store.getters.deskData.filter(
         (desk) => desk.id == this.deskId
@@ -81,10 +105,7 @@ export default {
     color: rgb(11, 11, 103);
   }
 }
-.buttonWrapper {
-  display: flex;
-  justify-content: center;
-}
+
 .rentBtn {
   background-color: rgb(11, 11, 103);
   width: 200px;
@@ -93,21 +114,58 @@ export default {
   margin-right: 30px;
   color: aliceblue;
   font-weight: 800;
+  &:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+  }
 }
 .buttonWrapper {
+  display: flex;
+  justify-content: center;
   p {
     color: rgb(149, 13, 6);
     font-size: 20px;
     font-weight: 700;
   }
 }
-.cancelBtn {
-  background-color: rgb(149, 13, 6);
-  width: 200px;
-  height: 40px;
-  margin-top: 30px;
-  margin-right: 30px;
-  color: aliceblue;
+
+.weekContainer {
+  color: rgb(103, 15, 27);
   font-weight: 800;
+}
+.btnContainer {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-right: 20px;
+  button {
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    background-color: rgb(103, 15, 27);
+    width: 30px;
+    height: 30px;
+    color: aliceblue;
+    font-weight: 600;
+    padding: 0px;
+
+    &:disabled {
+      background-color: grey;
+      cursor: not-allowed;
+    }
+
+    /* button[disabled] {
+      background-color: #cccccc;
+    } */
+  }
+}
+.weekNumber {
+  text-align: center;
+  margin-top: 40px;
+  margin-right: 20px;
+  p {
+    text-align: center;
+    font-size: 20px;
+  }
 }
 </style>

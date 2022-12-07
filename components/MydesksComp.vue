@@ -6,10 +6,6 @@
     <div v-for="(desk, index) in deskList" :key="desk.id">
       <div class="deskContainer">
         <div class="contentWrapper">
-          <p>IDDDD:</p>
-          <p>{{ desk.id }}</p>
-        </div>
-        <div class="contentWrapper">
           <p>Room N:</p>
           <p>{{ desk.roomNumber }}</p>
         </div>
@@ -24,6 +20,10 @@
         <div class="contentWrapper">
           <p>Position:</p>
           <p>{{ desk.position }}</p>
+        </div>
+        <div class="contentWrapper">
+          <p>Rented for:</p>
+          <p>{{ desk.rentWeeks }} (weeks)</p>
         </div>
         <div class="contentWrapper">
           <button @click="cancelHandler(desk.id, index)">Cancel Renting</button>

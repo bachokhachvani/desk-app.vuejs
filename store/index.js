@@ -44,7 +44,7 @@ export default () =>
       cancelRent(state, payload) {
         const desk = state.desks.filter((desk) => desk.id == payload.id);
         desk[0].isTaken = false;
-
+        desk[0].rentWeeks = 0;
         state.desks.map((obj) => desk.find((o) => o.id === obj.id) || obj);
         console.log("desks", state.desks);
 
@@ -73,6 +73,7 @@ export default () =>
       rentDesk(state, payload) {
         const desk = state.desks.filter((desk) => desk.id == payload.id);
         desk[0].isTaken = true;
+        desk[0].rentWeeks = payload.rentWeeks;
         state.desks.map((obj) => desk.find((o) => o.id === obj.id) || obj);
         state.user.ownedDesks.push(desk[0]);
         console.log("users", state.users);
