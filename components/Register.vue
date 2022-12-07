@@ -47,6 +47,7 @@ export default {
       ];
       oldUsers.push(new User(this.name, this.email, this.password));
       localStorage.setItem("users", JSON.stringify(oldUsers));
+      this.$store.dispatch("getUpdatedUsersAfterRegister", { users: oldUsers });
       this.$router.push("/login");
     },
   },

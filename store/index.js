@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 import { deskData } from "../components/data/desks";
 import { roomData } from "../components/data/rooms";
+import { userData } from "../components/data/users";
 
 export default () =>
   new Vuex.Store({
@@ -40,6 +41,31 @@ export default () =>
       },
     },
     mutations: {
+      getUpdatedUsersAfterRegister(state, payload) {
+        state.users = payload.users;
+        console.log("yleee diidiii", payload.users);
+        console.log("yleee patara", state.users);
+      },
+      rentDesk(state, payload) {
+        const desk = state.desks.filter((desk) => desk.id == payload.id);
+        desk[0].isTaken = true;
+        state.desks.map((obj) => desk.find((o) => o.id === obj.id) || obj);
+
+        state.user.ownedDesks.push(desk[0]);
+
+        console.log("users", state.users);
+        console.log("desks", state.desks);
+
+        const user = state.user;
+        const index = state.users
+          .map((object) => object.email)
+          .indexOf(user.email);
+
+        state.users[index].ownedDesks.push(desk[0]);
+
+        localStorage.setItem("desks", JSON.stringify(state.desks));
+        localStorage.setItem("users", JSON.stringify(state.users));
+      },
       logout(state, payload) {
         state.isLogged = false;
         state.user = {};
@@ -79,10 +105,12 @@ export default () =>
         }
       },
       initialiseStoreWithUsers(state, payload) {
-        if (localStorage.getItem("users")) {
+        if (state.users.length === 0 && !localStorage.getItem("users")) {
+          // state.users = JSON.parse(localStorage.getItem("users"));
+          localStorage.setItem("users", JSON.stringify(userData));
+          state.users = userData;
+        } else if (state.users.length === 0 && localStorage.getItem("users")) {
           state.users = JSON.parse(localStorage.getItem("users"));
-        } else {
-          state.users = [];
         }
       },
     },
@@ -108,6 +136,12 @@ export default () =>
       },
       logoutAction(context, payload) {
         context.commit("logout");
+      },
+      rentDeskAction(context, payload) {
+        context.commit("rentDesk", payload);
+      },
+      getUpdatedUsersAfterRegister(context, payload) {
+        context.commit("getUpdatedUsersAfterRegister", payload);
       },
     },
   });
