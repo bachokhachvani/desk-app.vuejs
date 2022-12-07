@@ -12,6 +12,14 @@
           <b-nav-item v-if="navbarMode === 'admin'" to="/users"
             >Users</b-nav-item
           >
+          <b-nav-item v-if="navbarMode === 'Client'" to="/mydesks"
+            >My desks</b-nav-item
+          >
+          <b-nav-item
+            v-if="navbarMode === 'room_manager' || navbarMode === 'admin'"
+            to="/myrooms"
+            >My Rooms</b-nav-item
+          >
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">

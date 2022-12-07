@@ -26,13 +26,13 @@
       </div>
       <div class="buttonWrapper">
         <button
-          v-if="deskData.isTaken === false && mode !== 'guest'"
+          v-if="deskData.isTaken === false && mode === 'Client'"
           class="rentBtn"
           @click="rentHandler"
         >
           Rent Desk
         </button>
-        <p v-if="deskData.isTaken && mode !== 'guest'">Desk is rented!</p>
+        <p v-if="deskData.isTaken">Desk is rented!</p>
       </div>
     </div>
   </div>
