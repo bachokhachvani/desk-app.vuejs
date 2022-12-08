@@ -18,4 +18,11 @@ export default function ({ store, from, route, redirect }) {
   if (mode !== "room_manager" && mode !== "admin" && name === "myrooms") {
     redirect("/home");
   }
+
+  if (mode === "guest" && name === "index") {
+    redirect("/login");
+  }
+  if (mode !== "guest" && name === "index") {
+    redirect("/home");
+  }
 }

@@ -44,9 +44,9 @@ export default {
   font-size: 25px;
 }
 .userContainer {
-  display: flex;
-  justify-content: flex-start;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding-left: 20px;
 }
 .contentWrapper {
   display: flex;

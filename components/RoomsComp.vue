@@ -57,9 +57,12 @@ p {
   font-size: 25px;
 }
 .roomContainer {
-  display: flex;
+  /* display: flex;
   justify-content: flex-start;
-  gap: 10px;
+  gap: 10px; */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-left: 20px;
   &:hover {
     background-color: rgb(210, 203, 203);
   }

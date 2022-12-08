@@ -59,9 +59,12 @@ p {
   font-size: 25px;
 }
 .deskContainer {
-  display: flex;
-  justify-content: flex-start;
-  gap: 10px;
+  /* display: flex;
+  justify-content: flex-start; */
+  /* gap: 10px; */
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin-left: 20px;
 }
 .contentWrapper {
   display: flex;

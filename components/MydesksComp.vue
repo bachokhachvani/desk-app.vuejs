@@ -38,6 +38,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      fields: ["prize", "size", "position", "rentWeeks", "roomNumber"],
+    };
+  },
   computed: {
     deskList() {
       return this.$store.getters.user.user.ownedDesks;
@@ -66,12 +71,13 @@ p {
   font-size: 25px;
 }
 .deskContainer {
-  display: flex;
-  justify-content: flex-start;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  margin-left: 20px;
 }
 .contentWrapper {
   display: flex;
+  min-width: 100px;
   gap: 10px;
   button {
     border: none;
