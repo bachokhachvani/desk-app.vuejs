@@ -21,6 +21,9 @@
           />
         </div>
         <button>Login</button>
+        <div v-if="this.isError" class="errorContainer">
+          <p>Email or password is Incorrect!</p>
+        </div>
       </form>
     </div>
   </div>
@@ -36,6 +39,7 @@ export default {
     return {
       email: "",
       password: "",
+      isError: false,
     };
   },
   computed: {
@@ -51,7 +55,8 @@ export default {
           ? users.filter((data) => data.email === this.email)[0]
           : new User(null, null, null);
 
-      const isPassword = isUser.password === this.password;
+      const isPassword = isUser ? isUser.password === this.password : false;
+
       console.log("isUser:", isUser);
       console.log(isPassword);
       if (isUser && isPassword) {
@@ -59,6 +64,8 @@ export default {
         this.$router.push("/home");
       } else {
         this.$store.dispatch("getUser", { isLogged: false, user: {} });
+        this.isError = true;
+        console.log("isError: ", this.isError);
       }
     },
   },
@@ -105,5 +112,13 @@ label {
   width: 100px;
   margin-right: 20px;
   font-weight: 600;
+}
+
+.errorContainer {
+  p {
+    font-size: 16px;
+    font-weight: 600;
+    color: red;
+  }
 }
 </style>
