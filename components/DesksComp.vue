@@ -22,8 +22,10 @@
           <p>{{ desk.position }}</p>
         </div>
         <div class="contentWrapper">
-          <p>isTaken:</p>
-          <p>{{ desk.isTaken }}</p>
+          <p v-if="!desk.isTaken">isTaken:</p>
+          <p v-if="!desk.isTaken">{{ desk.isTaken }}</p>
+          <p v-if="desk.isTaken">Rented to:</p>
+          <p v-if="desk.isTaken">{{ desk.owner }}</p>
         </div>
       </div>
     </div>
