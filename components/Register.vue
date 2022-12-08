@@ -41,7 +41,6 @@ export default {
   computed: {},
   methods: {
     submitHandler() {
-      console.log("user", new User(this.name, this.email, this.password));
       const oldUsers = JSON.parse(localStorage.getItem("users")) || [
         ...userData,
       ];

@@ -5,7 +5,7 @@ export default class Room {
     this.roomCapacity = roomCapacity;
     this.size = size;
 
-    //default manager is bacho cause he has admin role
-    this.manager = manager ? manager : "khachvanis@gmail.com";
+    //default manager is admin@gmail.com cause he has admin role
+    this.manager = manager ? manager : "admin@gmail.com";
   }
 }

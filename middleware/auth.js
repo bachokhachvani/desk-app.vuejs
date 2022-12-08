@@ -13,8 +13,6 @@ export default function ({ store, from, route, redirect }) {
     redirect("/login");
   }
 
-  console.log("mode", mode);
-
   if (mode !== "room_manager" && mode !== "admin" && name === "myrooms") {
     redirect("/home");
   }

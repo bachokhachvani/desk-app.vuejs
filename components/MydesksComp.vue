@@ -50,7 +50,6 @@ export default {
   },
   methods: {
     cancelHandler(id, index) {
-      console.log("index", index);
       this.$store.dispatch("cancelRentAction", { id, index });
     },
   },

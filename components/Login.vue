@@ -29,11 +29,7 @@
 <script>
 import { userData } from "./data/users";
 import User from "./models/user";
-import { roomData } from "./data/rooms";
-import { deskData } from "./data/desks";
 
-// console.log(roomData);
-// console.log(deskData);
 export default {
   name: "Login",
   data() {

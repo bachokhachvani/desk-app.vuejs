@@ -46,10 +46,8 @@ export default () =>
         desk[0].isTaken = false;
         desk[0].rentWeeks = 0;
         state.desks.map((obj) => desk.find((o) => o.id === obj.id) || obj);
-        console.log("desks", state.desks);
 
         state.user.ownedDesks.splice(payload.index, 1);
-        console.log("users", state.user.ownedDesks);
 
         const user = state.user;
         const index = state.users
@@ -57,8 +55,6 @@ export default () =>
           .indexOf(user.email);
 
         state.users[index].ownedDesks.splice(payload.index, 1);
-
-        console.log("userYleeo", state.users);
 
         localStorage.setItem("users", JSON.stringify(state.users));
         localStorage.setItem("desks", JSON.stringify(state.desks));
@@ -76,8 +72,6 @@ export default () =>
         desk[0].rentWeeks = payload.rentWeeks;
         state.desks.map((obj) => desk.find((o) => o.id === obj.id) || obj);
         state.user.ownedDesks.push(desk[0]);
-        console.log("users", state.users);
-        console.log("desks", state.desks);
         const user = state.user;
         const index = state.users
           .map((object) => object.email)
@@ -85,7 +79,6 @@ export default () =>
         state.users[index].ownedDesks.push(desk[0]);
         localStorage.setItem("desks", JSON.stringify(state.desks));
         localStorage.setItem("users", JSON.stringify(state.users));
-        console.log("stateuser", state.user);
         localStorage.setItem(
           "userInfo",
           JSON.stringify({ isLogged: state.isLogged, user: state.user })
@@ -95,7 +88,6 @@ export default () =>
         state.isLogged = false;
         state.user = {};
         localStorage.removeItem("userInfo");
-        console.log("commited");
       },
       manageRoomsData(state, payload) {
         if (state.rooms.length === 0 && !localStorage.getItem("rooms")) {
