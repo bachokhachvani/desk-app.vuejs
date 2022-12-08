@@ -49,7 +49,7 @@ export default {
       const isUser =
         users.filter((data) => data.email === this.email).length > 0
           ? users.filter((data) => data.email === this.email)[0]
-          : new User(null, null, null); //shesacvlelia
+          : new User(null, null, null);
 
       const isPassword = isUser.password === this.password;
       console.log("isUser:", isUser);

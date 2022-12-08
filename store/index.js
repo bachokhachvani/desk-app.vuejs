@@ -43,12 +43,14 @@ export default () =>
     mutations: {
       cancelRent(state, payload) {
         const desk = state.desks.filter((desk) => desk.id == payload.id);
+
         desk[0].isTaken = false;
         desk[0].rentWeeks = 0;
+        desk[0].owner = "";
+
         state.desks.map((obj) => desk.find((o) => o.id === obj.id) || obj);
 
         state.user.ownedDesks.splice(payload.index, 1);
-
         const user = state.user;
         const index = state.users
           .map((object) => object.email)
@@ -68,11 +70,16 @@ export default () =>
       },
       rentDesk(state, payload) {
         const desk = state.desks.filter((desk) => desk.id == payload.id);
+        const user = state.user;
+        console.log("user", state.user);
+
         desk[0].isTaken = true;
         desk[0].rentWeeks = payload.rentWeeks;
+        desk[0].owner = state.user.email;
+
         state.desks.map((obj) => desk.find((o) => o.id === obj.id) || obj);
         state.user.ownedDesks.push(desk[0]);
-        const user = state.user;
+
         const index = state.users
           .map((object) => object.email)
           .indexOf(user.email);

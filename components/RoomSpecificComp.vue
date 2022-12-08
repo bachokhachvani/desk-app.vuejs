@@ -26,10 +26,6 @@
             <p>Position:</p>
             <p>{{ desk.position }}</p>
           </div>
-          <!-- <div class="contentWrapper">
-            <p>isTaken:</p>
-            <p>{{ desk.isTaken }}</p>
-          </div> -->
         </div>
       </nuxt-link>
     </div>
